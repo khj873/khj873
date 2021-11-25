@@ -205,7 +205,7 @@ while True:
                 if ac['currency']!='KRW':
                     ticker='KRW-'+ac['currency']
                     cd, bb=get_bb(ticker, '3', '200', 30)
-                    if cd[0]['high']>bb[0]['BH']:
+                    if cd[0]['close']>bb[0]['BH']:
                         #매도
                         bal = upbit.get_balance(ticker)
                         if bal > 0:

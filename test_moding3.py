@@ -253,10 +253,15 @@ while True:
         t_min=매수주문시간-t_now
         if t_min.total_seconds()<=-120 and 주문티커!="":
             print(주문티커)
-            if len(upbit.get_order(주문티커))>0:
-                upbit.cancel_order(upbit.get_order(주문티커))
+            orderNumList=upbit.get_order(주문티커)
+            if len(orderNumList)>0:
+                for orderNum in orderNumList:
+                    upbit.cancel_order(orderNum)
             주문티커=""
         
+        if t_min.total_seconds()<=-600:
+            매수주문시간 = datetime.now()
+            
         if t_now.minute == 11 or t_now.minute == 21 or t_now.minute == 31 or t_now.minute == 41 or t_now.minute == 51 or t_now.minute == 1:
             체크=False
         if (t_now.minute == 10 or t_now.minute == 20 or t_now.minute == 30 or t_now.minute == 40 or t_now.minute == 50 or t_now.minute == 0) and not 체크:
